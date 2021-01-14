@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-header>
+                Manage Module
+                <div class="buttons-row float-right">
+                    <button type="button" class="appearance-filled" (click)="onList()" [size]="'small'" [status]="'primary'" nbButton>List</button>
+                </div>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-xxxl-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="Name" class="label">Name</label>
+                                    <input type="text" readonly value="{{modName}}" nbInput fullWidth id="Name">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="ModuleName" class="label">Module Name</label>
+                                    <input type="text" readonly value="{{catName}}" nbInput fullWidth id="ModuleName">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <nb-card *ngFor="let role of roleArr">
+            <nb-card-header>{{role.name}}</nb-card-header>
+            <nb-card-body>
+                <div class="validation-checkboxes">
+                    <span *ngFor="let action of actionArr.moduleActionList">
+                        <nb-checkbox (change)="checkValueMenu($event,action)" *ngIf="role.roleId == action.roleId" checked={{action.isActive}}>{{action.action}}&nbsp;&nbsp;&nbsp;&nbsp;</nb-checkbox>
+                    </span>
+                    <div class="buttons-row float-right">
+                        <button type="button" class="appearance-filled"  [size]="'small'" [status]="'success'" (click)="onSave(role.roleId,action)"
+                            nbButton [class.disabledBtn]="loading"><nb-icon nbPrefix class="fa fa-spinner fa-spin" pack="font-awesome"></nb-icon>Save</button>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

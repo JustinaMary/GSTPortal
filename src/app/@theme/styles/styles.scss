@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import '../../home/sass/variables';
+
+// themes - our custom or/and out of the box themes
+@import 'themes';
+
+// framework component themes (styles tied to theme variables)
+@import '~@nebular/theme/styles/globals';
+@import '~@nebular/auth/styles/all';
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/grid';
+
+// loading progress bar theme
+@import './pace.theme';
+
+@import './layout';
+@import './overrides';
+
+// install the framework and custom global styles
+@include nb-install() {
+
+  // framework global styles
+  @include nb-theme-global();
+  @include nb-auth-global();
+
+  @include ngx-layout();
+  // loading progress bar
+  @include ngx-pace-theme();
+
+  @include nb-overrides();
+}
+
+;
+
+//************* Tushar Add *******************
+.buttons-row {
+  margin: -0.5rem;
+}
+
+button[nbButton] {
+  margin: 0.5rem;
+}
+
+.action-icon {
+  @include nb-ltr(margin-right, 0.5rem);
+  @include nb-rtl(margin-left, 0.5rem);
+}
+
+.actions-card {
+  height: 8rem;
+}
+
+.popover-card {
+  margin: 0;
+  max-width: 20rem;
+}
+
+.infinite-cards {
+  nb-card {
+    &.own-scroll {
+      height: 70vh;
+    }
+  }
+}
+
+.stateslabel {
+  color: #000000;
+  font-family: Open Sans, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1rem;
+}
+
+.padding2Rem {
+  padding-left: 2.4rem !important;
+}
+
+.px-2-left {
+  padding-left: 10px !important;
+}
+
+[nbInput].status-basic {
+
+  background-color: #fff;
+}
+
+nb-layout .layout .layout-container .content .columns nb-layout-column {
+  padding: 0;
+}
+
+nb-tabset .tab-link {
+  text-transform: capitalize;
+
+}
+
+.spinner {
+  background-color: $white !important;
+}
+
+.margin5Rem {
+  margin-left: 5rem;
+}
+
+.padding6Rem {
+  padding-left: 6.2rem !important;
+}
+
+.day-cell.disabled,
+nb-calendar-picker .month-cell.disabled,
+nb-calendar-picker .year-cell.disabled {
+  .cell-content {
+    color: #ccc !important;
+  }
+}
+
+.treeviewlargerclmn {
+  width: 80% !important;
+}
+
+.nb-tree-grid-header-cell,
+.nb-tree-grid-cell,
+.nb-tree-grid-footer-cell {
+  border: 1px solid #dee2e6 !important;
+}
+
+.addNewOption {
+  color: #219bfc !important;
+}
+
+[nbInput] {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.back-btn {
+  border: 0.5px solid #082d5f;
+  color: #082d5f;
+  padding: 4px 20px;
+  font-size: 12px;
+  background-color: transparent;
+  border-radius: 8px;
+}
+
+.backBtnmargin {
+  margin-bottom: 10px;
+}
+
+ng2-smart-table table tr.ng2-smart-titles th {
+  font-weight: 500 !important;
+}
+
+.label {
+  color: $primary-color;
+}
+
+nb-select.appearance-outline.status-basic .select-button {
+  font-weight: $font-weight-3;
+}
+
+[nbInput].status-basic {
+  font-weight: $font-weight-3;
+}
+
+nb-menu ul.menu-items {
+  margin: 0;
+  padding: 0;
+  margin-left: -20px;
+}
+
+ng2-smart-table .ng2-smart-actions {
+  height: auto !important;
+}
+
+nb-select.size-small:not(.full-width) {
+  margin: 2px 1px !important;
+}
+
+[nbInput].shape-rectangle {
+  margin: 5px 1px !important;
+}
+
+.errorMessage {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: $error-color;
+}
+
+nb-select {
+  margin: 5px 1px !important;
+}
+
+select {
+  background-color: #edf1f7;
+  border-color: #e4e9f2;
+  margin: 5px 1px !important;
+  font-weight: 400;
+  font-family: 'Roboto', sans-serif !important;
+  width: 100%;
+  height: 32px;
+  border-radius: 3px;
+  line-height: 24px;
+  padding-left: 5px;
+}
+
+select:active {
+  border: none;
+}
+
+.asterick {
+  color: red;
+}
+
+.form-group {
+  position: relative;
+
+  .palceholder {
+    position: absolute;
+    top: 7px;
+    left: 8px;
+    color: #b1b1b1;
+    display: none;
+  }
+
+  label {
+    font-weight: 400;
+    color: #232121;
+    font-size: 13px;
+  }
+
+  .star {
+    color: red;
+  }
+}
+
+.doclink {
+  cursor: pointer;
+  text-decoration: none;
+  width: auto;
+  color: #1a34b8;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #1a34b8;
+}
+
+.doclink:hover {
+  text-decoration: none;
+  border: 1px solid #808080;
+}
+
+.fa-spinner {
+  display: none !important;
+}
+
+.disabledBtn {
+  pointer-events: none;
+  opacity: 0.5;
+
+  .fa-spinner {
+    display: inline-block !important;
+    width: 1.5rem;
+  }
+}
+
+.detailKey {
+  font-size: 12px;
+  color: #072e5f;
+  background-color: aliceblue;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.detailValue {
+  font-size: 12px;
+  color: #000;
+}
+
+.testedClass {
+  color: green;
+  font-size: 20px;
+}
+
+.noTestedClass {
+  color: red;
+  font-size: 20px;
+}
+
+.errorMsg {
+  color: red;
+  font-size: 13.5px;
+}

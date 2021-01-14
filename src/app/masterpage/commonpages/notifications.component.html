@@ -1,0 +1,25 @@
+<div class="infinite-cards row">
+    <div class="col-md-12 col-lg-12 col-xxxl-12">
+        <nb-card class="own-scroll" [ngClass]="{'d-none' : !hasRecords}" accent="info" [nbSpinner]="loading" nbSpinnerStatus="warning"
+            nbSpinnerSize="large" nbSpinnerMessage="Loading..">
+            <nb-card-header>Notifications</nb-card-header>
+            <nb-card-body nbInfiniteList [threshold]="200" (bottomThreshold)="loadNext(firstCard)">
+                <nb-list>
+                    <!--[ngStyle]="{'background-color': (!newsPost.isSeen) ? '#73c7af' : '#ffffff'}"-->
+                    <nb-list-item *ngFor="let newsPost of firstCard.news" [ngStyle]="{'background-color': (!newsPost.isSeen) ? '#DEECFF' : '#ffffff'}">
+                        <!-- <p>{{newsPost.title}}</p> -->
+                        <div>
+                            <span>{{newsPost.details}}</span>
+                            <br>
+                            <nb-icon icon="eye-outline" title="View" (click)="onShow(newsPost.parameter, newsPost.notifyType, newsPost.notifyId)" (nbPopover)="View"
+                                [options]="{ animation: { type: 'zoom' } }" style="font-size:1pc;" status="primary"></nb-icon>
+                        </div>
+                    </nb-list-item>
+                </nb-list>
+            </nb-card-body>
+        </nb-card>
+        <nb-card [ngClass]="{'d-none' : hasRecords}" accent="info">
+            <nb-card-header>No notifications for you</nb-card-header>
+        </nb-card>
+    </div>
+</div>

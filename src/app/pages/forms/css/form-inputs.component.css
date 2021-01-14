@@ -1,0 +1,33 @@
+nb-card-body {
+  overflow: visible;
+  padding-top: 0;
+}
+
+nb-card-body > * {
+  margin-top: 1rem;
+}
+
+.full-name-inputs,
+.validation-checkboxes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 -0.5rem;
+}
+
+.full-name-inputs > *,
+.validation-checkboxes > * {
+  margin: 0 0.5rem;
+}
+
+.checkbox-radio {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.demo-items {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 33%;
+          flex: 1 0 33%;
+}

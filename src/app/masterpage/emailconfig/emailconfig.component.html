@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-header>
+        Email Configuration
+      </nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="configForm" class="form-valide">
+
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="email" class="label">Email Id</label>
+                <input type="text" maxlength="200" nbInput fullWidth formControlName="email" fieldSize="small"
+                  [status]="(submitted && f.email.errors) ?'danger' : 'basic'" placeholder="abc@domain.com">
+                <ng-container *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.email.errors.required">Email Id is required</p>
+                  <p class="caption status-danger" *ngIf="f.email.errors.EmailFormatValidator">Please provide a valid Email Id</p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="password" class="label">Password</label>
+                <input type="password" nbInput fullWidth formControlName="password"
+                  fieldSize="small" [status]="(submitted && f.password.errors) ?'danger' : 'basic'">
+                <ng-container *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.password.errors.required">Password is required</p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="fromTitle" class="label">From Title</label>
+                <input type="text" nbInput fullWidth formControlName="fromTitle" fieldSize="small"
+                  [status]="(submitted && f.fromTitle.errors) ?'danger' : 'basic'" placeholder="Lufthansa Airline">
+                <ng-container *ngIf="submitted && f.fromTitle.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.fromTitle.errors.required">From title is required</p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="smtpServer" class="label">SMTP Server</label>
+                <input type="text" nbInput fullWidth formControlName="smtpServer" fieldSize="small"
+                  [status]="(submitted && f.smtpServer.errors) ?'danger' : 'basic'" placeholder="smtp.gmail.com">
+                <ng-container *ngIf="submitted && f.smtpServer.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.smtpServer.errors.required">SMTP server detail is required
+                  </p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="portNumber" class="label">Port Number</label>
+                <input type="text" ngxOnlyNumber="true" nbInput fullWidth formControlName="portNumber" fieldSize="small"
+                  [status]="(submitted && f.portNumber.errors) ?'danger' : 'basic'" placeholder="587">
+                <ng-container *ngIf="submitted && f.portNumber.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.portNumber.errors.required">Port number is required</p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="portNumber" class="label">Is Tested ?</label>
+                <p>
+                  <i class="fa fa-check testedClass" aria-hidden="true" *ngIf="isTested"></i>
+                  <i class="fa fa-times noTestedClass" aria-hidden="true" *ngIf="!isTested"></i>
+                </p>
+              </div>
+            </div>
+            <div class="col-sm-3" *ngIf="!isTested">
+              <div class="form-group">
+                  <label for="portNumber" class="label">Test the Configuration</label>
+               <p> <button nbButton hero status="warning" [size]="'small'" (click)="openModalWithComponent()">Test</button></p>
+              </div>
+            </div>
+          </div>
+          <div class="buttons-row float-right">
+            <button type="button" (click)="submitEmailConfig()" class="appearance-filled" [size]="'small'"
+              [status]="'success'" nbButton [class.disabledBtn]="loading">
+              <nb-icon nbPrefix class="fa fa-spinner fa-spin" pack="font-awesome"></nb-icon>Save
+            </button>
+            <button type="button" (click)="onReset()" class="appearance-outline" [size]="'small'" [status]="'info'"
+              nbButton>Reset</button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

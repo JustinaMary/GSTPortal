@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-header>
+                {{title}}
+                <div class="buttons-row float-right">
+                    <button type="button" class="appearance-filled" (click)="onList()" [size]="'small'" [status]="'primary'" nbButton>List</button>
+                </div>
+            </nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="transTypeForm" class="form-valide">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="TransType" class="label">Transaction Type</label>
+                                <input type="text" maxlength="2" trim="blur" nbInput fullWidth formControlName="TransType" fieldSize="small" [status]="(submitted && f.TransType.errors) ?'danger' : 'basic'">
+                                <ng-container *ngIf="submitted && f.TransType.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.TransType.errors.required">Transaction Type is required</p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="form-group">
+                                <label for="Description" class="label">Description</label>
+                                <textarea rows="3" nbInput fullWidth formControlName="Description" placeholder="Description" fieldSize="small"
+                                  [status]="(submitted && f.Description.errors) ?'danger' : 'basic'"></textarea>
+                                <ng-container *ngIf="submitted && f.Description.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.Description.errors.required">Description is required</p>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="buttons-row float-right">
+                        <button type="button" (click)="onSubmit()" class="appearance-filled" [size]="'small'" [status]="'success'" nbButton [class.disabledBtn]="loading"><nb-icon nbPrefix class="fa fa-spinner fa-spin" pack="font-awesome"></nb-icon>Save</button>
+                        <button type="button" [disabled]="isDisabled" (click)="onReset()" class="appearance-outline" [size]="'small'" [status]="'info'" nbButton>Reset</button>
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

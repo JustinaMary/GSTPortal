@@ -1,0 +1,113 @@
+<div class="lists row" *ngIf="requestDetail">
+
+  <div class="col-md-12 col-lg-12 col-xxxl-12">
+    <nb-card class="list-card">
+      <nb-card-header>Customer Register Request Details
+        <div class="buttons-row float-right">
+          <button type="button" class="appearance-filled" (click)="onList()" [size]="'small'" [status]="'primary'"
+            nbButton>List</button>
+        </div>
+      </nb-card-header>
+      <div class="row">
+        <div class="col-md-6 col-lg-6 col-xxxl-6">
+          <nb-list>
+            <nb-list-item>
+              <label for="CustomerName" class="label"> <span class="detailKey">Customer Name:</span>
+                <span class="detailValue"> {{requestDetail.customerName}}</span></label>
+            </nb-list-item>
+
+            <nb-list-item>
+              <label for="Mobile" class="label"><span class="detailKey">Mobile:</span> <span class="detailValue"> {{requestDetail.mobile}}</span></label>
+            </nb-list-item>
+            <nb-list-item>
+              <label for="GSTNo" class="label"><span class="detailKey">GST No:</span> <span class="detailValue"> {{requestDetail.gstNo}}</span></label>
+            </nb-list-item>
+            <nb-list-item>
+              <label for="ticketNo" class="label"><span class="detailKey">Ticket Number:</span> <sapn class="detailValue"> {{requestDetail.ticketNo}}</sapn></label>
+            </nb-list-item>
+            <nb-list-item>
+              <label for="createdDate" class="label"><span class="detailKey">Created Date:</span> <span class="detailValue"> {{requestDetail.createdDate}}</span></label>
+            </nb-list-item>
+            <nb-list-item>
+              <label for="VerifiedBy" class="label"><span class="detailKey">Verified By:</span> <span class="detailValue"> {{requestDetail.verifiedByName}}</span></label>
+            </nb-list-item>
+            <nb-list-item *ngIf="panLink">
+              <a target="_blank" class="label doclink" href='{{panLink}}'>PAN Copy</a>
+            </nb-list-item>
+          </nb-list>
+
+        </div>
+        <div class="col-md-6 col-lg-6 col-xxxl-6">
+          <nb-list>
+            <nb-list-item>
+              <label for="Email" class="label"><span class="detailKey">Email:</span> <span class="detailValue"> {{requestDetail.email}}</span></label>
+            </nb-list-item>
+            <nb-list-item>
+              <label for="PANNo" class="label"><span class="detailKey">PANNo:</span> <span class="detailValue"> {{requestDetail.panNo}}</span></label>
+            </nb-list-item>
+            <nb-list-item>
+              <label for="PNRNo" class="label"><span class="detailKey">PNR No:</span> <span class="detailValue"> {{requestDetail.pnr}}</span></label>
+            </nb-list-item>
+            <nb-list-item>
+              <label for="DateOfIssue" class="label"><span class="detailKey">Date Of Issue:</span> <span class="detailValue"> {{requestDetail.dateofIssue}}</span></label>
+            </nb-list-item>
+            <nb-list-item>
+              <label for="status" class="label"><span class="detailKey">Status:</span> <span class="detailValue"> {{statusText}}</span></label>
+            </nb-list-item>
+            <nb-list-item>
+              <label for="verifiedOn" class="label"><span class="detailKey">Verified On:</span> <span class="detailValue"> {{requestDetail.verifiedOn}}</span></label>
+            </nb-list-item>
+            <nb-list-item *ngIf="(gstLink)">
+              <a target="_blank" class="label doclink" href='{{gstLink}}'>GST Document</a>
+            </nb-list-item>
+          </nb-list>
+
+        </div>
+
+      </div>
+
+    </nb-card>
+  </div>
+</div>
+
+<div class="row" *ngIf="IsAirlineUserLogin">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-body>
+        <form [formGroup]="custRegiReqForm" class="form-valide">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="Notes" class="label">Notes</label>
+                <textarea rows="3" formControlName="Notes" nbInput fullWidth placeholder="Notes" fieldSize="small"
+                  [status]="'basic'"></textarea>
+                <div *ngIf="submitted && f.Notes.errors" class="errorMessage">
+                  <div *ngIf="f.Notes.errors.required">Kindly enter the reason for not verifying the corporate</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="Status" class="label">Status</label>
+                <nb-select [disabled]="!IsAirlineUserLogin" placeholder="" [size]="'small'"
+                  [status]="(submitted && f.Status.errors) ?'danger' : 'basic'" fullWidth formControlName="Status"
+                  (selectedChange)="onStatusChange($event)">
+                  <!-- <nb-option disable value="">Select</nb-option> -->
+                  <nb-option *ngFor="let item of enumStatusArr" [value]="item.enumId"
+                    [disabled]="item.description === 'New'">
+                    {{item.description }}
+                  </nb-option>
+                </nb-select>
+
+              </div>
+            </div>
+            <div class="col-sm-3"><br />
+              <button type="button" (click)="onSubmit()" class="appearance-filled"
+                [size]="'small'" [status]="'success'" nbButton [class.disabledBtn]="loading"><nb-icon nbPrefix class="fa fa-spinner fa-spin" pack="font-awesome"></nb-icon>Save</button>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

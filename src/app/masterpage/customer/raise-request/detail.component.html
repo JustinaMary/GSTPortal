@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-header>
+                {{title}}
+                <div class="buttons-row float-right">
+                    <button type="button" class="appearance-filled" (click)="onList()" [size]="'small'" [status]="'primary'" nbButton>List</button>
+                </div>
+            </nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="raiseReqDtlsForm" class="form-valide">
+                        <input type="hidden" formControlName="RrId">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="TicketNo" class="">Ticket No:</label><br>
+                                <label for="" class="label">{{TicketNo}}</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="PNRNo" class="">PNR No:</label><br>
+                                <label for="" class="label">{{PNRNo}}</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="RequestType" class="">Request Type:</label><br>
+                                <label for="" class="label">{{RequestType}}</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="StateId" class="">State Code:</label><br>
+                                <label for="" class="label">{{StateId}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive" [ngClass]="{'d-none' : !isTableDisplay}">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Notes</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of historyArr; index as i">
+                                    <th scope="row">{{ i + 1 }}</th>
+                                    <td>{{ item.status === 6 ? 'New' : item.status === 7 ? 'Close': 'In Progress' }}</td>
+                                    <td>{{ item.notes }}</td>
+                                    <td  style="white-space:nowrap;">{{ item.createdDate | date : "dd MMM yyyy HH:mm" }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

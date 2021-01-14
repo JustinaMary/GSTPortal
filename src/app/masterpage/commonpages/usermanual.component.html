@@ -1,0 +1,146 @@
+<div class="accordions-container row">
+    <div class="accordion-container col-md-12 col-lg-12 col-xxxl-12">
+
+        <nb-card>
+            <nb-card-header>Process / User Manual</nb-card-header>
+            <!-- <nb-card-body>
+              <button nbButton (click)="toggle()">Toggle First Item</button>
+            </nb-card-body> -->
+          </nb-card>
+
+        <nb-accordion multi>
+            <nb-accordion-item expanded=true>
+                <nb-accordion-item-header>
+                    Brief background
+                </nb-accordion-item-header>
+                <nb-accordion-item-body>
+                    This web based solution is aimed at easing the process of sharing the GST invoices, debit notes and
+                    credit notes (referred to as documents here after) with our customers. Currently the Airlines have been reciving the requests and sending the invoices via email.
+                    As an enhancement to this process, all documents would now be
+                    uploaded to a secure server space hosted by the airline. The customers will be given login
+                    credentials to access and download the documents
+                </nb-accordion-item-body>
+            </nb-accordion-item>
+
+            <nb-accordion-item expanded=true>
+                <nb-accordion-item-header>
+                    Customer registration
+                </nb-accordion-item-header>
+                <nb-accordion-item-body>
+                    A new customer can register on this portal by clicking on the Register tab on the home page
+                    <br/><br/>
+                    <img src="../../../assets/images/faq1.jpg" width="100%;" />
+                    <br/><br/>Fill in the details as mentioned on the form
+                    - Company name, PAN and GST numbers, Email and Phone number are mandatory.
+                    - Ticket number, PNR and Booking date are an optional input.
+                    - Upload a copy of the PAN and any one GST registration certificates.
+                    The airline will verify the details and activate the account. The customer will receive an email
+                    having the login credentials. On logging in for the first time, the customer has to change the password. This
+                    user account will be granted administrative privileges.
+
+                </nb-accordion-item-body>
+            </nb-accordion-item>
+
+            <nb-accordion-item expanded=true>
+                <nb-accordion-item-header>
+                    Setting up the company account
+                </nb-accordion-item-header>
+                <nb-accordion-item-body>
+                    In order to access all the documents shared by the airline, the administrator has to set up the
+                    following
+                    - List of states in which they are registered, (Select the state. Enter your GSTN for the state,
+                    Address and contact details)
+                    - Create additional user login accounts (optional). Access control can be set for each user account
+                    in terms of the States that they can access and the website features that they can access.
+                </nb-accordion-item-body>
+            </nb-accordion-item>
+
+            <nb-accordion-item expanded=true>
+              <nb-accordion-item-header>
+                  Setting up customer registered states
+              </nb-accordion-item-header>
+              <nb-accordion-item-body>
+                  The administrator login will provide access to the module to manage the state wise details as per
+                  the customer GSTN registrations.
+                  <br/><br/><img src="../../../assets/images/faq5.jpg" width="100%;" />
+              </nb-accordion-item-body>
+          </nb-accordion-item>
+
+          <nb-accordion-item expanded=true>
+            <nb-accordion-item-header>
+                User management
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                The customer administrator login can add new user login accounts and grant selective access in terms
+                of access to states / menu options (based on Role assigned). A user account can be deactivated when
+                required.
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+
+        <nb-accordion-item expanded=true>
+          <nb-accordion-item-header>
+              System module
+          </nb-accordion-item-header>
+          <nb-accordion-item-body>
+              This option will let the administrator define user access rights based on pre-defined roles. They
+              can grant or revoke access to certain menu functions as per policy.
+              <br/><br/><img src="../../../assets/images/faq6.jpg"  width="100%;"/>
+          </nb-accordion-item-body>
+      </nb-accordion-item>
+
+            <nb-accordion-item expanded=true>
+                <nb-accordion-item-header>
+                    Customer dashboard
+                </nb-accordion-item-header>
+                <nb-accordion-item-body>
+                    After logging into the account, the initial screen will have a dashboard showing statistics on the
+                    number of new documents uploaded by airline, response notifications on any queries raised by the customer etc.
+                </nb-accordion-item-body>
+            </nb-accordion-item>
+
+            <nb-accordion-item expanded=true>
+                <nb-accordion-item-header>
+                    Accessing your documents
+                </nb-accordion-item-header>
+                <nb-accordion-item-body>
+                    The airline will be uploading the documents regularly post processing. The customer can login to the
+                    portal and using the Documents menu option, download the required documents
+                    <br/><br/><img src="../../../assets/images/faq2.jpg"  width="100%;"/>
+                    <br/><br/>The customer can selectively download the document either as PDF files for individual document or a
+                    MS- Excel statement. The customer can search documents for a selected period, transaction type (Invoice, Credit note, CP
+                    invoice etc), a ticket number, PNR, passenger name or GSTN. Documents matching the request criteria,
+                    would be listed for the customer to download as required.
+                </nb-accordion-item-body>
+            </nb-accordion-item>
+
+            <nb-accordion-item expanded=true>
+                <nb-accordion-item-header>
+                    Missing or incorrect documents
+                </nb-accordion-item-header>
+                <nb-accordion-item-body>
+                    If the customer is unable to locate a document for any ticket or finds some error in the document
+                    already available, they can raise a request using the Raise request (Raised ticket) option.
+                    <br/><br/><img src="../../../assets/images/faq3.jpg"  width="100%;"/>
+                    <br/>The customer can fill up these details and submit the request. To request documents for multiple
+                    tickets, the customer can use the Bulk upload option and submit a file as per template (which can be
+                    downloaded and filled for sending a request).
+                    <br/><br/><img src="../../../assets/images/faq4.jpg"  width="100%;" />
+                    <br/><br/>The template is a 3 column CSV file listing the Ticket number, Customer GSTN, Transaction type.
+
+                </nb-accordion-item-body>
+            </nb-accordion-item>
+
+            <nb-accordion-item expanded=true>
+                <nb-accordion-item-header>
+                    Tracking the requests
+                </nb-accordion-item-header>
+                <nb-accordion-item-body>
+                    The customer will be able to track the status of their request on the dashboard or
+                    the Raise request menu option. An alert would be shown as soon as the airline responds or uploads a
+                    document as requested.
+                </nb-accordion-item-body>
+            </nb-accordion-item>
+
+        </nb-accordion>
+    </div>
+</div>

@@ -1,0 +1,168 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Success</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>{{popupText}}</p>
+  </div>
+</ng-template>
+<button id="openModalButton" [hidden]="true" (click)="openPopup(content)">Open Modal</button>
+
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-header>
+        {{title}}
+        <div class="buttons-row float-right">
+          <button type="button" class="appearance-filled" (click)="onList()" [size]="'small'" [status]="'primary'"
+            nbButton>List</button>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="raiseReqForm" class="form-valide">
+          <input type="hidden" formControlName="RrId">
+          <input type="hidden" formControlName="RequestedOn">
+          <input type="hidden" formControlName="RequestBy">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TicketNo" class="label">Ticket No</label>
+                <input type="text" [readonly]="isAirlineLogin || RrId >0" maxlength="100" trim="blur" nbInput fullWidth
+                  formControlName="TicketNo" fieldSize="small"
+                  [status]="(submitted && f.TicketNo.errors) ?'danger' : 'basic'" minlength="13" maxlength="13"
+                  (ngModelChange)="onTicketChange($event)" />
+                <ng-container *ngIf="submitted && f.TicketNo.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.TicketNo.errors.required">Ticket no is required</p>
+                  <p class="caption status-danger" *ngIf="f.TicketNo.errors.minlength">Ticket no must be of 13 digit</p>
+                  <p class="caption status-danger" *ngIf="f.TicketNo.errors.TicketValidate">Airline for this ticket
+                    number is not exist</p>
+                  <p class="caption status-danger" *ngIf="f.TicketNo.errors.TicketAlreadyExists">Ticket number is
+                    already exist</p>
+                  <p class="caption status-danger" *ngIf="f.TicketNo.errors.AirlineNotRegistered">Airline for this
+                    ticket number is not Registered</p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="GSTNo" class="label">Select GST No</label>
+                <div *ngIf="RrId == 0">
+                  <nb-select placeholder="" [size]="'small'" fullWidth formControlName="GSTNo">
+                    <nb-option *ngFor="let item of customerGstNos" [value]="item">
+                      {{ item }}
+                    </nb-option>
+                  </nb-select>
+                </div>
+                <div *ngIf="isAirlineLogin || RrId > 0">
+                  <input type="text" [readonly]="isAirlineLogin || RrId > 0" nbInput fullWidth
+                  formControlName="GSTNo" fieldSize="small" />
+                </div>
+                <ng-container *ngIf="submitted && f.GSTNo.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.GSTNo.errors.required">Please select GST No
+                  </p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="TransType" class="label">Transaction Type</label>
+                <nb-select placeholder="" [size]="'small'" fullWidth formControlName="TransType"
+                  (selectedChange)="onTransTypeselected($event)" [disabled]="isAirlineLogin || RrId > 0">
+                  <nb-option *ngFor="let item of transactionTypeArr" [value]="item.typeId">
+                    {{ item.transType }}
+                  </nb-option>
+                </nb-select>
+                <ng-container *ngIf="submitted && f.TransType.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.TransType.errors.required">Please select Transaction Type
+                  </p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="PNRNo" class="label">PNR No</label>
+                <input type="text" [readonly]="isAirlineLogin || RrId > 0" maxlength="6" trim="blur" nbInput fullWidth
+                  formControlName="PNRNo" fieldSize="small" [status]="(submitted && f.PNRNo.errors) ?'danger' : 'basic'"
+                  minlength="6" maxlength="6" oninput="this.value = this.value.toUpperCase()" />
+                <ng-container *ngIf="submitted && f.PNRNo.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.PNRNo.errors.minlength">PNR No. must be 6 characters long
+                  </p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="RequestType" class="label">Request Type</label>
+                <nb-select placeholder="" [disabled]="isAirlineLogin || RrId > 0" [size]="'small'"
+                  [status]="(submitted && f.RequestType.errors) ?'danger' : 'basic'" fullWidth
+                  formControlName="RequestType">
+                  <nb-option value="">Select</nb-option>
+                  <nb-option *ngFor="let item of reqtypeArr" [value]="item.id">
+                    {{item.description }}
+                  </nb-option>
+                </nb-select>
+                <ng-container *ngIf="submitted && f.RequestType.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.RequestType.errors.required">Request Type is required</p>
+                </ng-container>
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="Status" class="label">Status</label>
+                <nb-select placeholder="" [disabled]="!isAirlineLogin" [size]="'small'"
+                  [status]="(submitted && f.Status.errors) ?'danger' : 'basic'" fullWidth formControlName="Status">
+                  <nb-option value="">Select</nb-option>
+                  <nb-option *ngFor="let item of statusArr" [value]="item.enumId">
+                    {{item.description }}
+                  </nb-option>
+                </nb-select>
+                <ng-container *ngIf="submitted && f.Status.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.Status.errors.required">Status is required</p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="Notes" class="label">Notes</label>
+                <textarea nbInput maxlength="255" trim="blur" fullWidth placeholder=""
+                  formControlName="Notes"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="buttons-row float-right pb-2">
+            <button type="button" (click)="onSubmit()" class="appearance-filled"
+              [size]="'small'" [status]="'success'" nbButton [class.disabledBtn]="loading"><nb-icon nbPrefix class="fa fa-spinner fa-spin" pack="font-awesome"></nb-icon>Save</button>
+            <button type="button" [disabled]="isDisabled" (click)="onReset()" class="appearance-outline"
+              [size]="'small'" [status]="'info'" nbButton>Reset</button>
+          </div>
+          <div class="table-responsive" [ngClass]="{'d-none' : !isTableDisplay}">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Notes</th>
+                  <th scope="col" *ngIf="isAirlineLogin === true">System Notes</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of historyArr; index as i">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ item.status === 6 ? 'New' : item.status === 7 ? 'Close': 'In Progress' }}</td>
+                  <td>{{ item.notes }}</td>
+                  <td *ngIf="isAirlineLogin === true">{{ item.systemNotes }}</td>
+                  <td>{{ item.createdDate | date : "dd MMM yyyy HH:mm" }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

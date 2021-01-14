@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-header>
+                {{title}}
+                <div class="buttons-row float-right">
+                    <button type="button" class="appearance-filled" (click)="onList()" [size]="'small'" [status]="'primary'" nbButton>List</button>
+                </div>
+            </nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="airlinemasterForm" class="form-valide">
+                    <input type="hidden" formControlName="AirlineId">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="AirlineName" class="label">Airline Name</label>
+                                <input type="text" maxlength="200" trim="blur" nbInput fullWidth formControlName="AirlineName" fieldSize="small" [status]="(submitted && f.AirlineName.errors) ?'danger' : 'basic'">
+                                <ng-container *ngIf="submitted && f.AirlineName.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.AirlineName.errors.required">Airline Name is required</p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="AirlineCode" class="label">Airline Code</label>
+                                <input type="text" maxlength="2" trim="blur" nbInput fullWidth formControlName="AirlineCode" fieldSize="small" [status]="(submitted && f.AirlineCode.errors) ?'danger' : 'basic'">
+                                <ng-container *ngIf="submitted && f.AirlineCode.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.AirlineCode.errors.required">Airline Code is required</p>
+                                    <p class="caption status-danger" *ngIf="f.AirlineCode.errors.dataUnique">Airline Code already exists</p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="Digit3Code" class="label">3 Digits Code</label>
+                                <input type="text" maxlength="3" trim="blur" nbInput fullWidth formControlName="Digit3Code" fieldSize="small" [status]="(submitted && f.Digit3Code.errors) ?'danger' : 'basic'">
+                                <ng-container *ngIf="submitted && f.Digit3Code.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.Digit3Code.errors.required">Code is required</p>
+                                    <p class="caption status-danger" *ngIf="f.Digit3Code.errors.dataUnique">Code already exists</p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="PANNo" class="label">PAN No</label>
+                                <input type="text" maxlength="200" trim="blur" nbInput fullWidth formControlName="PANNo" fieldSize="small" [status]="(submitted && f.PANNo.errors) ?'danger' : 'basic'">
+                                <ng-container *ngIf="submitted && f.PANNo.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.PANNo.errors.required">PAN No is required</p>
+                                    <p class="caption status-danger" *ngIf="f.PANNo.errors.pattern">Please provide a valid PAN No</p>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <nb-checkbox formControlName="IsOwnServer">Is Own Server?</nb-checkbox>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <nb-checkbox formControlName="CustomerVerify">Customer Verify</nb-checkbox>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <nb-checkbox formControlName="CanAccess">Can Access</nb-checkbox>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <nb-checkbox formControlName="PermitAgents">Permit Agents</nb-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                              <label for="groupAirlines" class="label">Group Airlines</label>
+                              <nb-select multiple [(ngModel)]="airlineSelected" [size]="'small'" fullWidth placeholder="Select"
+                                formControlName="groupAirlines" (selectedChange)="selectedAirlines($event)">
+                                <nb-option *ngFor="let item of allAirlineArr" [value]="item.airlineId">
+                                  {{item.airlineName }}</nb-option>
+                              </nb-select>
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label class="label">Selected Airlines</label> <br />
+                              <span *ngFor="let state of AirlineNameArr; let isLast=last" class="stateslabel">
+                                {{state}}{{isLast ? '' : ', '}}
+                              </span>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="buttons-row float-right">
+                        <button type="button" [disabled]="isDisabled" (click)="onSubmit()" class="appearance-filled" [size]="'small'" [status]="'success'"
+                            nbButton>Save</button>
+                        <button type="button" [disabled]="isDisabled" (click)="onReset()" class="appearance-outline" [size]="'small'" [status]="'info'"
+                            nbButton>Reset</button>
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

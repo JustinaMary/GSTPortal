@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-header>
+                {{title}}
+                <div class="buttons-row float-right">
+                    <button type="button" class="appearance-filled" (click)="onList()" [size]="'small'" [status]="'primary'" nbButton>List</button>
+                </div>
+            </nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="customerstateForm" class="form-valide">
+                    <input type="hidden" formControlName="CustStId">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="StateCode" class="label">State Code</label>
+                                <nb-select placeholder="" (selectedChange)="changeState($event)" [size]="'small'" [status]="(submitted && f.StateCode.errors) ?'danger' : 'basic'" fullWidth formControlName="StateCode">
+                                    <nb-option value="">Select</nb-option>
+                                    <nb-option *ngFor="let item of stategstArr" [value]="item.gstId">
+                                        {{item.stateName }}
+                                    </nb-option>
+                                </nb-select>
+                                <ng-container *ngIf="submitted && f.StateCode.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.StateCode.errors.required">State Code is required</p>
+                                    <p class="caption status-danger" *ngIf="f.StateCode.errors.dataUnique">State Code already exists</p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="CityName" class="label">City</label>
+                                <input type="text" maxlength="200" nbInput fullWidth formControlName="CityName" fieldSize="small" [status]="(submitted && f.CityName.errors) ?'danger' : 'basic'">
+                                <ng-container *ngIf="submitted && f.CityName.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.CityName.errors.required">City is required</p>
+                                </ng-container>
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="GSTNo" class="label">GST No</label>
+                                <nb-form-field>
+                                <span nbPrefix class="margin5Rem">{{gstPrefix.toUpperCase()}}</span>
+                                <input type="text" maxlength="100" nbInput fullWidth formControlName="GSTNo"
+                                  fieldSize="small" [status]="(submitted && f.GSTNo.errors) ?'danger' : 'basic'"
+                                    oninput="this.value = this.value.toUpperCase()" maxlength="3" class="padding6Rem">
+                                    </nb-form-field>
+                                <ng-container *ngIf="submitted && f.GSTNo.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.GSTNo.errors.required">GST No is required</p>
+                                    <p class="caption status-danger" *ngIf="f.GSTNo.errors.GSTLast3DigitValidator">Please provide a valid GST No</p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="Address" class="label">Address</label>
+                                <textarea rows="3" maxlength="255" trim="blur" nbInput fullWidth formControlName="Address" fieldSize="small"  placeholder="Address"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="EmailId" class="label">Email Id</label>
+                                <input type="text" maxlength="200" nbInput fullWidth formControlName="EmailId" fieldSize="small" [status]="(submitted && f.EmailId.errors) ?'danger' : 'basic'">
+                                <ng-container *ngIf="submitted && f.EmailId.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.EmailId.errors.required">Email Id is required</p>
+                                    <p class="caption status-danger" *ngIf="f.EmailId.errors.pattern">Please provide a valid Email Id</p>
+                                    <!-- <p class="caption status-danger" *ngIf="f.EmailId.errors.EmailUnique">Email already exists</p> -->
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="PhoneNo" class="label">Contact No</label>
+                                <input type="text" minlength="10" maxlength="10" nbInput fullWidth formControlName="PhoneNo" fieldSize="small" [status]="(submitted && f.PhoneNo.errors) ?'danger' : 'basic'">
+                                <ng-container *ngIf="submitted && f.PhoneNo.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.PhoneNo.errors.required">Contact No is required</p>
+                                    <p class="caption status-danger" *ngIf="f.PhoneNo.errors.minlength && !f.PhoneNo.errors.pattern">Contact No should contain 10 digits</p>
+                                    <p class="caption status-danger" *ngIf="f.PhoneNo.errors.pattern">Please enter only digits</p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="PinCode" class="label">Pin Code</label>
+                                <input type="text" minlength="6" maxlength="6" nbInput fullWidth formControlName="PinCode" fieldSize="small" [status]="(submitted && f.PinCode.errors) ?'danger' : 'basic'">
+                                <ng-container *ngIf="submitted && f.PinCode.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.PinCode.errors.required">Pin Code is required</p>
+                                    <p class="caption status-danger" *ngIf="f.PinCode.errors.minlength && !f.PinCode.errors.pattern">Pin Code should contain 6 digits</p>
+                                    <p class="caption status-danger" *ngIf="f.PinCode.errors.pattern">Please enter only digits</p>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons-row float-right">
+                        <button type="button" (click)="onSubmit()" class="appearance-filled" [size]="'small'" [status]="'success'"
+                            nbButton [class.disabledBtn]="loading"><nb-icon nbPrefix class="fa fa-spinner fa-spin" pack="font-awesome"></nb-icon>Save</button>
+                        <button type="button" [disabled]="isDisabled" (click)="onReset()" class="appearance-outline" [size]="'small'" [status]="'info'"
+                            nbButton>Reset</button>
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

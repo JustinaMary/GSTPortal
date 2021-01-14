@@ -1,0 +1,15 @@
+<ngx-zero-column-layout>
+    <router-outlet>
+        <nb-card>
+            <nb-card-body>
+                <div class="flex-centered col-xl-4 col-lg-6 col-md-8 col-sm-12">
+                    <h2 class="title">Page Not Found</h2>
+                    <small class="sub-title">The page you were looking for doesn't exist</small>
+                    <button nbButton fullWidth (click)="goToHome()" type="button" class="home-button">
+                        Take me home
+                    </button>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </router-outlet>
+</ngx-zero-column-layout>

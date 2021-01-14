@@ -1,0 +1,568 @@
+<ngx-zero-column-layout>
+  <router-outlet>
+
+    <body
+      class="vertical-layout vertical-menu-modern 1-column  navbar-floating footer-static bg-full-screen-image  blank-page blank-page"
+      data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
+
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Success</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>{{popupText}}</p>
+        </div>
+      </ng-template>
+      <button id="openModalButton" [hidden]="true" (click)="openPopup(content)">Open Modal</button>
+
+      <div class="container-fluid">
+        <div class="row" style="height: 100vh;">
+          <div class="col-lg-8 col-md-6 order-md-1 order-lg-1 col-12 bannerdiv">
+            <div class="row text-center staticdiv groupimg">
+              <div class="col-md-12 landing">
+                <div class="row">
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4"> <img src="../../assets/images/Lufthansa-white.png" width="100%;" /></div>
+                  <div class="col-md-4"></div>
+                </div>
+                <div class="row pt-2">
+                  <div class="col-md-2"></div>
+                  <div class="col-md-8">
+                    <h4 class="taglinetxt">
+                      GST document download centre <br />
+                      Get your invoices / credit notes / debit notes here<br />
+                    </h4>
+                  </div>
+                  <div class="col-md-2"></div>
+
+                </div>
+
+              </div>
+
+
+
+              <!-- <h5 class="taglinetxt">
+                GST document download centre <br/>
+                   Get your invoices / credit notes / debit notes here<br/>
+                 </h5> -->
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-md-2"></div>
+                  <div class="col-md-8 text-center ">
+                    <!-- <h5 class="taglinetxt">
+               GST document download centre <br/>
+                  Get your invoices / credit notes / debit notes here<br/>
+                </h5> -->
+                    <!-- <h5 class="taglinetxt">Claim your GST Invoice and Credit Notes' Details<br>
+                  Introducing our Airline GST Platform.</h5> -->
+                  </div>
+                  <div class="col-md-2"></div>
+                </div>
+              </div>
+            </div>
+            <div class="row yellowpatch">
+              <div class="col-md-12 text-center">
+                <h6>How It Works</h6>
+              </div>
+            </div>
+
+            <div class="row feature">
+              <div class="col-lg-4 col-12">
+                <div class="row text-center">
+                  <div class="col-md-12"> <br><img src="../../assets/images/download.png" /></div>
+
+                  <div class="col-md-12">
+                    <p class=" title">Download documents </p>
+                  </div>
+
+                  <div class="col-md-12">
+                    <p class="para">Access the Documents menu on your login to get your invoices / CRN / DRN
+                  </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-12">
+                <div class="row text-center">
+                  <div class="col-md-12"> <br><img src="../../assets/images/incorrect.png" /></div>
+
+                  <div class="col-md-12">
+                    <p class=" title">Missing or incorrect documents</p>
+                  </div>
+
+                  <div class="col-md-12">
+                    <p class="para">Raise a request to Inform us of any discrepancies or share the details of any missing documents
+                  </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 col-12">
+                <div class="row text-center">
+                  <div class="col-md-12"> <br><img src="../../assets/images/team.png" /></div>
+
+                  <div class="col-md-12">
+                    <p class=" title">Manage users</p>
+                  </div>
+                  <div class="col-md-12">
+                    <p class="para">Create and Manage additional user logins to control access to selective features
+                  </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 order-md-2 order-lg-2 col-12 tabsbody ">
+
+            <div class="form-group text-center">
+              <img src="../../assets/images/Lufthansa_Logo.png" />
+              <div class="float-right pt-2">
+                  <a title="User manual" href="/usermanual"><nb-icon nbPrefix class="fa fa-book" pack="font-awesome">
+                    </nb-icon></a>&nbsp;&nbsp;
+                <a title="FAQ" href="/faq"><nb-icon nbPrefix class="far fa-question-circle" pack="font-awesome">
+                </nb-icon></a>
+              </div>
+            </div>
+            <div class="row fixdiv custom_vertical_scrollbar">
+              <div class="col-md-12 tabsection">
+
+                <nb-tabset fullWidth class="tabs-div">
+                  <nb-tab tabTitle="Login" class="tabname" style="padding: 0px;">
+
+                    <div *ngIf="!showResetDiv" class="commondiv col-md-12">
+                      <p class="sub-heading"><br>Sign in to your account</p>
+                      <form [formGroup]="loginForm" class="login-container" (ngSubmit)="onSubmitLogin()">
+                        <div class="form-group">
+                          <nb-form-field>
+                            <nb-icon nbPrefix class="far fa-file-code-o" pack="font-awesome"></nb-icon>
+                            <input type="text" nbInput fullWidth placeholder="Code" fieldSize="medium"
+                              formControlName="code" [ngClass]="{ 'is-invalid': loginsubmitted && f.code.errors }"
+                              name="code" maxlength="4" minlength="3" />
+                          </nb-form-field>
+                          <div *ngIf="loginsubmitted && f.code.errors" class="errorMessage">
+                            <div *ngIf="f.code.errors.required">Code is required</div>
+                            <div *ngIf="f.code.errors.minlength">Code should be at least 3 characters long.</div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <nb-form-field>
+                            <nb-icon nbPrefix class="far fa-user" pack="font-awesome"></nb-icon>
+                            <input type="text" nbInput fullWidth placeholder="Username" fieldSize="medium"
+                              formControlName="username"
+                              [ngClass]="{ 'is-invalid': loginsubmitted && f.username.errors }" />
+                          </nb-form-field>
+                          <div *ngIf="loginsubmitted && f.username.errors" class="errorMessage">
+                            <div *ngIf="f.username.errors.required">Username is required</div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <nb-form-field>
+                            <nb-icon nbPrefix class="fa fa-lock" pack="font-awesome"></nb-icon>
+                            <input type="password" nbInput fullWidth placeholder="Password" fieldSize="medium"
+                              formControlName="password"
+                              [ngClass]="{ 'is-invalid': loginsubmitted && f.password.errors }" />
+                          </nb-form-field>
+                          <div *ngIf="loginsubmitted && f.password.errors" class="errorMessage">
+                            <div *ngIf="f.password.errors.required">Password is required</div>
+                          </div>
+                        </div>
+                        <div class="form-group txt">
+                          <nb-checkbox (checkedChange)="toggleRememberMe($event)"><span class="txt">
+                              Remember me</span></nb-checkbox>
+                          <div class="text-right"><a href="/forgotpassword" class="card-link txt">Forgot
+                              Password?</a>
+                          </div>
+                        </div>
+                        <div class="form-group text-center">
+                          <button class="btn custom-btn btn-inline" [class.disabledBtn]="loading"><nb-icon nbPrefix class="fa fa-spinner fa-spin" pack="font-awesome"></nb-icon>Login</button>
+                        </div>
+                      </form>
+                    </div>
+
+                    <div *ngIf="showResetDiv" class="commondiv col-md-12">
+                      <p class="sub-heading"><br />Update Password</p>
+                      <label class="label">You are currently using the default password to login.<br />
+                        Please update your password to access portal.</label>
+                      <form [formGroup]="resetPwForm" class="login-container" (ngSubmit)="onSubmitResetPW()">
+                        <div class="form-group">
+                          <nb-form-field>
+                            <nb-icon nbPrefix class="fa fa-lock" pack="font-awesome"></nb-icon>
+                            <input type="password" nbInput fullWidth placeholder="New Password" fieldSize="medium"
+                              formControlName="newPassword"
+                              [ngClass]="{ 'is-invalid': resetpwsubmitted && i.newPassword.errors }" />
+                          </nb-form-field>
+                          <div *ngIf="resetpwsubmitted && i.newPassword.errors" class="errorMessage">
+                            <div *ngIf="i.newPassword.errors.required">Password is required</div>
+                            <div *ngIf="i.newPassword.errors.pattern">Password must have atleast 8 characters including
+                              one lowercase,uppercase,number and special character</div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <nb-form-field>
+                            <nb-icon nbPrefix class="fa fa-lock" pack="font-awesome"></nb-icon>
+                            <input type="password" nbInput fullWidth placeholder="Confirm Password" fieldSize="medium"
+                              formControlName="confirmPassword"
+                              [ngClass]="{ 'is-invalid': resetpwsubmitted && i.confirmPassword.errors }" />
+                          </nb-form-field>
+                          <div *ngIf="resetpwsubmitted && i.confirmPassword.errors" class="errorMessage">
+                            <div *ngIf="i.confirmPassword.errors.required">Confirm Password is required</div>
+                            <div *ngIf="i.confirmPassword.errors.mustMatch">Passwords must match</div>
+                          </div>
+                        </div>
+                        <div class="form-group text-center">
+                          <button class="btn custom-btn btn-inline" [class.disabledBtn]="loading"><nb-icon nbPrefix class="fa fa-spinner fa-spin" pack="font-awesome"></nb-icon>Update</button>
+                        </div>
+                      </form>
+                    </div>
+
+                  </nb-tab>
+                  <!-- registration tab -->
+                  <nb-tab tabTitle="Register" class="tabname" style="padding: 0px;">
+
+                    <div class="commondiv col-md-12">
+                      <p class="sub-heading"><br>Register</p>
+                      <form [formGroup]="registerForm" class="register-container" (ngSubmit)="onSubmitRegister()">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <nb-select [(ngModel)]="defaultLufthansa"
+                                formControlName="code" fieldSize="small" [hidden]="true">
+                                <nb-option *ngFor="let item of airlineLuf" [value]="item.airlineId">
+                                  {{item.airlineName }}
+                                </nb-option>
+                              </nb-select>
+                              <!-- <div *ngIf="registersubmitted && g.code.errors" class="errorMessage">
+                                <div *ngIf="g.code.errors.required">Airline is required</div>
+                              </div> -->
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <nb-form-field>
+                                <!-- <label>Client Name</label> -->
+                                <input type="text" nbInput placeholder="Client Name *" fullWidth fieldSize="medium"
+                                  formControlName="clientName"
+                                  [ngClass]="{ 'is-invalid': registersubmitted && g.clientName.errors }"
+                                  name="clientName" />
+                              </nb-form-field>
+                              <div *ngIf="registersubmitted && g.clientName.errors" class="errorMessage">
+                                <div *ngIf="g.clientName.errors.required">Client name is required</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <nb-form-field>
+                                <!-- <label>PAN No.</label> -->
+                                <input type="text" nbInput placeholder="PAN No. *" fullWidth fieldSize="medium"
+                                  formControlName="panNo"
+                                  [ngClass]="{ 'is-invalid': registersubmitted && g.panNo.errors }" name="panNo"
+                                  oninput="this.value = this.value.toUpperCase()" maxlength="10" />
+                              </nb-form-field>
+                              <div *ngIf="registersubmitted && g.panNo.errors" class="errorMessage">
+                                <div *ngIf="g.panNo.errors.required">PAN No. is required</div>
+                                <div *ngIf="g.panNo.errors.PANFormatValidator">PAN No format is incorrect</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <nb-form-field>
+                                <!-- <label>GST No.</label> -->
+                                <input type="text" nbInput placeholder="GST No. *" fullWidth fieldSize="medium"
+                                  formControlName="gstNo"
+                                  [ngClass]="{ 'is-invalid': registersubmitted && g.gstNo.errors }" name="gstNo"
+                                  oninput="this.value = this.value.toUpperCase()" maxlength="15" />
+                              </nb-form-field>
+                              <div *ngIf="registersubmitted && g.gstNo.errors" class="errorMessage">
+                                <div *ngIf="g.gstNo.errors.required">GST No. is required</div>
+                                <div *ngIf="g.gstNo.errors.GSTFormatValidator">GST No. format is incorrect</div>
+                                <div *ngIf="g.gstNo.errors.PANGSTValidate">GST No. should contain same PAN No.</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <nb-form-field>
+                                <!-- <label>PNR No.</label> -->
+                                <input type="text" nbInput placeholder="PNR No." fullWidth fieldSize="medium"
+                                  formControlName="pnrNo"
+                                  [ngClass]="{ 'is-invalid': registersubmitted && g.pnrNo.errors }" name="pnrNo"
+                                  minlength="6" maxlength="6" oninput="this.value = this.value.toUpperCase()" />
+                              </nb-form-field>
+                              <div *ngIf="registersubmitted && g.pnrNo.errors" class="errorMessage">
+                                <!-- <div *ngIf="g.pnrNo.errors.required">PNR No. is required</div> -->
+                                <div *ngIf="g.pnrNo.errors.minlength">PNR No. must be 6 characters long</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <nb-form-field>
+                                <!-- <label>Ticket No.</label> -->
+                                <input type="text" nbInput placeholder="Ticket No." fieldSize="medium" fullWidth
+                                  formControlName="ticketNo"
+                                  [ngClass]="{ 'is-invalid': registersubmitted && g.ticketNo.errors }" name="ticketNo"
+                                  minlength="13" maxlength="13" />
+                              </nb-form-field>
+                              <div *ngIf="registersubmitted && g.ticketNo.errors" class="errorMessage">
+                                <!-- <div *ngIf="g.ticketNo.errors.required">Ticket No. is required</div> -->
+                                <div *ngIf="g.ticketNo.errors.minlength">Ticket No. must be 13 characters long</div>
+                                <div *ngIf="g.ticketNo.errors.TicketValidate">Airline for this ticket number is not
+                                  exist
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <!-- <label>Date of Issue</label> -->
+                              <nb-form-field>
+                                <nb-icon nbPrefix class="far fa-calendar-alt" pack="font-awesome"></nb-icon>
+                                <input nbInput placeholder="Booking Date" readonly [nbDatepicker]="issuedDate" fullWidth
+                                  fieldSize="medium" formControlName="issuedDate">
+                                <nb-datepicker #issuedDate format="DD MMM YYYY" [max]="max">
+                                </nb-datepicker>
+                              </nb-form-field>
+                              <div *ngIf="registersubmitted && g.issuedDate.errors" class="errorMessage">
+                                <!-- <div *ngIf="g.issuedDate.errors.required">Issue date is required</div> -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-md-12">
+                            <span class="subtext">Contact Details</span>
+                            <hr class="nospace" />
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <!-- <label>Email Id</label> -->
+                              <nb-form-field>
+                                <nb-icon nbPrefix class="far fa-envelope" pack="font-awesome"></nb-icon>
+                                <input type="text" nbInput placeholder="Email Id *" fullWidth fieldSize="medium"
+                                  formControlName="email"
+                                  [ngClass]="{ 'is-invalid': registersubmitted && g.email.errors }" name="email"
+                                  oninput="this.value = this.value.toLowerCase()" />
+                              </nb-form-field>
+
+                              <div *ngIf="registersubmitted && g.email.errors" class="errorMessage">
+                                <div *ngIf="g.email.errors.required">Email is required</div>
+                                <div *ngIf="g.email.errors.EmailFormatValidator">Enter valid Email Id</div>
+                                <div *ngIf="g.email.errors.EmailUnique">Email already registered</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <nb-form-field>
+                                <!-- <label>Contact No.</label> -->
+                                <nb-icon nbPrefix class="fas fa-phone" pack="font-awesome"></nb-icon>
+                                <input type="text" ngxOnlyNumber="true" nbInput placeholder="Contact No. *" fullWidth
+                                  fieldSize="medium" formControlName="contactNo"
+                                  [ngClass]="{ 'is-invalid': registersubmitted && g.contactNo.errors }"
+                                  name="contactNo" />
+                              </nb-form-field>
+                              <div *ngIf="registersubmitted && g.contactNo.errors" class="errorMessage">
+                                <div *ngIf="g.contactNo.errors.required">Contact No. is required</div>
+                                <div *ngIf="g.contactNo.errors.ContactNoExist">Contact No. already registered</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-md-12">
+                            <span class="subtext">Upload Documents</span>
+                            <hr class="nospace" />
+                          </div>
+                          <div class="form-group col-md-12 col-lg-12 col-xl-6">
+                            <label class="txt">PAN Document <span class="asterick">*</span></label>
+                            <div class="file-uploader">
+                              <div class="form-group">
+                                <input type="file" #panDoc fieldSize="medium" formControlName="panDoc"
+                                  class="appearance-outline" nbButton nbInput fullWidth
+                                  [status]="(registersubmitted && g.panDoc.errors) ?'danger' : 'basic'" id="file"
+                                  (change)="handlePanUpload($event.target.files)" accept=".pdf,.png,.jpg" />
+                                <div *ngIf="registersubmitted && g.panDoc.errors" class="errorMessage">
+                                  <div *ngIf="g.panDoc.errors.required">Document is required</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group col-md-12 col-lg-12 col-xl-6">
+                            <label class="txt">GST Document <span class="asterick">*</span></label>
+                            <div class="file-uploader">
+                              <div class="form-group">
+                                <input type="file" #gstDoc fieldSize="medium" formControlName="gstDoc"
+                                  class="appearance-outline" nbButton nbInput fullWidth
+                                  [status]="(registersubmitted && g.gstDoc.errors) ?'danger' : 'basic'" id="file"
+                                  (change)="handleGstUpload($event.target.files)" accept=".pdf,.png,.jpg" />
+                                <div *ngIf="registersubmitted && g.gstDoc.errors" class="errorMessage">
+                                  <div *ngIf="g.gstDoc.errors.required">Document is required</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group text-center">
+                          <button class="btn custom-btn btn-inline" [class.disabledBtn]="loading"><nb-icon nbPrefix class="fa fa-spinner fa-spin" pack="font-awesome"></nb-icon>Register</button>
+                        </div>
+                      </form>
+                    </div>
+                  </nb-tab>
+                  <!-- B2C user document download -->
+                  <nb-tab tabTitle="GST Invoice" class="tabname" style="padding: 0px;">
+                    <div class="col-md-12 commondiv">
+                      <p class="sub-heading"><br>Get GST documents</p>
+                      <form [formGroup]="documentForm" class="document-container" (ngSubmit)="onSubmitDocument()"
+                        autocomplete="off">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <nb-form-field>
+
+                                <input type="text" nbInput fieldSize="medium" fullWidth placeholder="Ticket No."
+                                  formControlName="docTicketNo"
+                                  [ngClass]="{ 'is-invalid': documentsubmitted && h.docTicketNo.errors }"
+                                  name="docTicketNo" minlength="13" maxlength="13" />
+                              </nb-form-field>
+                              <div *ngIf="documentsubmitted && h.docTicketNo.errors" class="errorMessage">
+                                <div *ngIf="h.docTicketNo.errors.required">Ticket No. is required</div>
+                                <div *ngIf="h.docTicketNo.errors.minlength">Ticket No. must be 13 characters long
+                                </div>
+                                <div *ngIf="h.docTicketNo.errors.TicketValidate">Airline for this ticket number is not
+                                  exist
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <nb-form-field>
+
+                                <input type="text" nbInput placeholder="PNR No." fullWidth fieldSize="medium"
+                                  formControlName="docPnrNo"
+                                  [ngClass]="{ 'is-invalid': documentsubmitted && h.docPnrNo.errors }" name="docPnrNo"
+                                  minlength="6" maxlength="6" oninput="this.value = this.value.toUpperCase()" />
+                              </nb-form-field>
+                              <div *ngIf="documentsubmitted && h.docPnrNo.errors" class="errorMessage">
+                                <div *ngIf="h.docPnrNo.errors.required">PNR No. is required</div>
+                                <div *ngIf="h.docPnrNo.errors.minlength">PNR No. must be 6 characters long</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <nb-form-field>
+
+                                <input type="text" nbInput fullWidth fieldSize="medium" placeholder="GST No."
+                                  formControlName="docGstNo"
+                                  [ngClass]="{ 'is-invalid': documentsubmitted && h.docGstNo.errors }" name="docGstNo"
+                                  oninput="this.value = this.value.toUpperCase()" />
+                              </nb-form-field>
+                              <div *ngIf="documentsubmitted && h.docGstNo.errors" class="errorMessage">
+                                <!-- <div *ngIf="h.docGstNo.errors.required">GST No. is required</div> -->
+                                <div *ngIf="h.docGstNo.errors.GSTFormatValidator">GST No. format is incorrect</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <nb-form-field>
+                                <nb-icon nbPrefix class="far fa-calendar-alt" pack="font-awesome"></nb-icon>
+
+                                <input nbInput placeholder="Booking Date" fullWidth readonly
+                                  [nbDatepicker]="docIssuedDate" fullWidth fieldSize="medium"
+                                  formControlName="docIssuedDate">
+                                <nb-datepicker #docIssuedDate format="DD MMM YYYY" [max]="max">
+                                </nb-datepicker>
+                              </nb-form-field>
+                              <div *ngIf="documentsubmitted && h.docIssuedDate.errors" class="errorMessage">
+                                <div *ngIf="h.docIssuedDate.errors.required">Date of Issue is required</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <nb-form-field>
+                                <nb-icon nbPrefix class="far fa-envelope" pack="font-awesome"></nb-icon>
+
+                                <input type="text" fullWidth fieldSize="medium" nbInput placeholder="Email"
+                                  formControlName="docEmail"
+                                  [ngClass]="{ 'is-invalid': documentsubmitted && h.docEmail.errors }" name="docEmail"
+                                  (change)="isEmailVerified($event)" />
+                              </nb-form-field>
+                              <div *ngIf="documentsubmitted && h.docEmail.errors" class="errorMessage">
+                                <div *ngIf="h.docEmail.errors.required">Email is required</div>
+                                <div *ngIf="h.docEmail.errors.EmailFormatValidator">Enter valid Email Id</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group" *ngIf="show">
+                              <nb-form-field>
+
+                                <input type="text" fullWidth fieldSize="medium" nbInput placeholder="OTP"
+                                  formControlName="emailOtp"
+                                  [ngClass]="{ 'is-invalid': documentsubmitted && h.emailOtp.errors }" name="emailOtp"
+                                  (change)="verifOtp($event)" />
+                              </nb-form-field>
+                              <div *ngIf="documentsubmitted && h.emailOtp.errors" class="errorMessage">
+                                <div *ngIf="h.emailOtp.errors.required">OTP is required</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <nb-form-field>
+                                <nb-icon nbPrefix class="fas fa-phone" pack="font-awesome"></nb-icon>
+                                <input type="text" ngxOnlyNumber="true" fullWidth fieldSize="small" nbInput
+                                  placeholder="Contact No" formControlName="docContactNo"
+                                  [ngClass]="{ 'is-invalid': documentsubmitted && h.docContactNo.errors }"
+                                  name="docContactNo" minlength="10" maxlength="10" />
+                              </nb-form-field>
+                              <div *ngIf="documentsubmitted && h.docContactNo.errors" class="errorMessage">
+                                <div *ngIf="h.docContactNo.errors.required">Contact No. is required</div>
+                                <div *ngIf="h.docContactNo.errors.minlength">Contact No should be 10 digits</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group text-center">
+                              <button class="btn custom-btn btn-inline" [class.disabledBtn]="loading"><nb-icon nbPrefix class="fa fa-spinner fa-spin" pack="font-awesome"></nb-icon>Get Documents</button>
+                            </div>
+                          </div>
+                        </div>
+
+                      </form>
+                    </div>
+                  </nb-tab>
+                </nb-tabset>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-12 footer text-center">
+                <div class="row grp-logo">
+                  <img src="../../assets/images/group-logo.png" style="width: 100%;" />
+                </div>
+                <p class="txt text-center"><br>Copyright © 2020 AirlineGST. All Rights Reserved</p>
+                <p class="txt pb-4">Powered by <a href="https://www.airlinegst.com/" target="_blank"
+                    class="blutxt">AirlineGST</a></p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </body>
+  </router-outlet>
+</ngx-zero-column-layout>

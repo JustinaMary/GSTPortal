@@ -1,0 +1,46 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{title}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" #div>
+  <div class="row buttons-row float-right">
+    <button type="button" nbButton outline (click)="downloadDocument()" [size]="'small'" [status]="'primary'"
+      nbButton>Download sample file format</button>
+  </div>
+  <form [formGroup]="csvForm" class="register-container" (ngSubmit)="onSubmitCsvFile()">
+    <div class="row col-md-12">
+      <div class="col-sm-12" *ngIf="airlineArr.length > 0">
+        <div class="form-group mt-3">
+          <label for="airlineId" class="label">Airlines</label> <br />
+          <select placeholder="" [size]="'small'" fullWidth formControlName="airlineId">
+            <option selected disabled>Select Airline</option>
+            <option *ngFor="let item of airlineArr" [value]="item.airlineId">{{item.airlineName}}</option>
+          </select>
+          <div *ngIf="submitted && g.airlineId.errors" class="errorMessage">
+            <div *ngIf="g.airlineId.errors.required">Kindly select Airline</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="form-group mt-3">
+          <label for="csvDoc" class="label">Upload CSV file</label>
+          <div class="file-uploader">
+            <div class="form-group">
+              <input type="file" #csvDoc fieldSize="medium" formControlName="csvDoc" class="appearance-outline" nbButton
+                nbInput fullWidth [status]="(submitted && g.csvDoc.errors) ?'danger' : 'basic'" id="file"
+                (change)="handleCsvUpload($event.target.files)" accept=".csv" />
+              <div *ngIf="submitted && g.csvDoc.errors" class="errorMessage">
+                <div *ngIf="g.csvDoc.errors.required">Kindly upload the document</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <button nbButton hero status="success" class="buttons-row float-right" [class.disabledBtn]="loading"><nb-icon nbPrefix class="fa fa-spinner fa-spin" pack="font-awesome"></nb-icon>Upload</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,20 @@
+.airlinebannerdiv {
+  background-size: cover;
+  background-image: url("../../assets/images/AirlineBanner.png");
+}
+
+.tabsbody {
+  background-color: #f4f9ff;
+  padding-top: 75px;
+}
+
+.tabsbody img {
+  width: 200px;
+}
+
+.errorMessage {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}

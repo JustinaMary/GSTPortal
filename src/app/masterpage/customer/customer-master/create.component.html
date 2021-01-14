@@ -1,0 +1,201 @@
+<div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-header>
+                New Airline Registration Request
+                <div class="buttons-row float-right">
+                    <button type="button" class="appearance-filled" (click)="onList()" [size]="'small'"
+                        [status]="'primary'" nbButton>List</button>
+                </div>
+            </nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="custRegiReqForm" class="form-valide">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="CustomerName" class="label">Customer Name</label>
+                                <input type="text" disabled maxlength="200" nbInput fullWidth
+                                    formControlName="CustomerName"
+                                    [status]="(submitted && f.CustomerName.errors) ?'danger' : 'basic'">
+                                <ng-container *ngIf="submitted && f.CustomerName.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.CustomerName.errors.required">Customer
+                                        Name is required</p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="Email" class="label">Email</label>
+                                <input type="text" disabled nbInput fullWidth formControlName="Email"
+                                    [status]="(submitted && f.Email.errors) ?'danger' : 'basic'">
+                                <ng-container *ngIf="submitted && f.Email.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.Email.errors.required">Email is required
+                                    </p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="Mobile" class="label">Mobile</label>
+                                <input type="text" disabled nbInput fullWidth formControlName="Mobile"
+                                    [status]="(submitted && f.Mobile.errors) ?'danger' : 'basic'">
+                                <ng-container *ngIf="submitted && f.Mobile.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.Mobile.errors.required">Email is required
+                                    </p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="PANNo" class="label">PAN No</label>
+                                <input type="text" disabled maxlength="20" nbInput fullWidth formControlName="PANNo"
+                                    [status]="(submitted && f.PANNo.errors) ?'danger' : 'basic'">
+                                <ng-container *ngIf="submitted && f.PANNo.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.PANNo.errors.required">PAN No is required
+                                    </p>
+                                    <p class="caption status-danger" *ngIf="f.PANNo.errors.PANFormatValidator">Please
+                                        provide a valid PAN No</p>
+                                </ng-container>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="GSTNo" class="label">GST No</label>
+                                <!-- <input type="text" maxlength="20" nbInput fullWidth formControlName="GSTNo"
+                                    [status]="(submitted && f.GSTNo.errors) ?'danger' : 'basic'"> -->
+                                    <nb-select placeholder="" fullWidth formControlName="GSTNo">
+                                        <nb-option *ngFor="let item of customerGstNos" [value]="item">
+                                            {{ item }}
+                                        </nb-option>
+                                    </nb-select>
+                                <ng-container *ngIf="submitted && f.GSTNo.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.GSTNo.errors.required">GSTNo No is
+                                        required</p>
+                                    <!-- <p class="caption status-danger" *ngIf="f.GSTNo.errors.GSTFormatValidator">Please
+                                        provide a
+                                        valid GST No</p> -->
+                                    <p class="caption status-danger" *ngIf="f.GSTNo.errors.TktValidate">This user is not
+                                        registered for this GST</p>
+                                </ng-container>
+
+                                
+
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="PNRNo" class="label">PNR No</label>
+                                <input type="text" nbInput fullWidth formControlName="PNRNo"
+                                    [status]="(submitted && f.PNRNo.errors) ?'danger' : 'basic'" minlength="6"
+                                    maxlength="6" oninput="this.value = this.value.toUpperCase()" />
+                                <ng-container *ngIf="submitted && f.PNRNo.errors" class="invalid-feedback">
+                                    <!-- <p class="caption status-danger" *ngIf="f.PNRNo.errors.required">PNR No is
+                                        required</p> -->
+                                    <p class="caption status-danger" *ngIf="f.PNRNo.errors.minlength">PNR No. must be 6
+                                        characters long</p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="TicketNo" class="label">Ticket Number</label>
+                                <input type="text" nbInput fullWidth formControlName="TicketNo"
+                                    [status]="(submitted && f.TicketNo.errors) ?'danger' : 'basic'" minlength="13"
+                                    maxlength="13" />
+                                <ng-container *ngIf="submitted && f.TicketNo.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.TicketNo.errors.required">Ticket number is
+                                        required</p>
+                                    <p class="caption status-danger" *ngIf="f.TicketNo.errors.TktValidate">This airline
+                                        is already registered</p>
+                                    <p class="caption status-danger" *ngIf="f.TicketNo.errors.minlength">Ticket No. must
+                                        be 13 characters long</p>
+                                    <p class="caption status-danger" *ngIf="f.TicketNo.errors.TicketValidate">Airline
+                                        for this ticket number is not
+                                        exist
+                                    </p>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="DateofIssue" class="label">Date of Issue</label>
+                                <nb-datepicker #formpicker format="DD MMM YYYY" [max]="max"></nb-datepicker>
+                                <input nbInput fullWidth formControlName="DateofIssue" [nbDatepicker]="formpicker"
+                                    [status]="(submitted && f.DateofIssue.errors) ?'danger' : 'basic'">
+                                <ng-container *ngIf="submitted && f.DateofIssue.errors" class="invalid-feedback">
+                                    <p class="caption status-danger" *ngIf="f.DateofIssue.errors.required">Date of Issue
+                                        is required</p>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="Notes" class="label">Notes</label>
+                                <textarea rows="3" nbInput fullWidth formControlName="Notes" placeholder="Notes"
+                                    [status]="'basic'"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="PanDoc" class="label">Pan Card</label>
+                                <div class="file-uploader">
+                                    <div class="form-group">
+                                        <input type="file" #panDoc formControlName="PanDoc" class="appearance-outline"
+                                            nbButton nbInput fullWidth [status]="'basic'" id="file"
+                                            (change)="handleFileInputPan($event.target.files)"
+                                            accept=".pdf,.png,.jpg" />
+                                        <a *ngIf="panLink" target="_blank" class="label doclink" href='{{panLink}}'>Pan
+                                            Document</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="GstDoc" class="label">GST Document</label>
+                                <div class="file-uploader">
+                                    <div class="form-group">
+                                        <input type="file" #gstDoc formControlName="GstDoc" class="appearance-outline"
+                                            nbButton nbInput fullWidth
+                                            [status]="(submitted && f.GstDoc.errors) ?'danger' : 'basic'" id="file"
+                                            (change)="handleFileInputGst($event.target.files)"
+                                            accept=".pdf,.png,.jpg" />
+                                        <ng-container *ngIf="submitted && f.GstDoc.errors" class="invalid-feedback">
+                                            <p class="caption status-danger" *ngIf="f.GstDoc.errors.required">GST
+                                                Document is required</p>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="buttons-row float-right">
+                        <button type="button" (click)="onSubmit()" class="appearance-filled" [size]="'small'"
+                            [status]="'success'" nbButton [class.disabledBtn]="loading">
+                            <nb-icon nbPrefix class="fa fa-spinner fa-spin" pack="font-awesome"></nb-icon>Save
+                        </button>
+                        <!-- <button type="button" [disabled]="isDisabled" (click)="onReset()" class="appearance-outline" [size]="'small'"
+                            [status]="'info'" nbButton>Reset</button> -->
+                    </div>
+
+
+                </form>
+
+            </nb-card-body>
+        </nb-card>
+
+
+
+
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<nb-card>
+    <nb-card-header>
+        Customer State Lists
+        <div class="buttons-row float-right">
+            <button type="button" class="appearance-filled" (click)="onAdd()" [size]="'small'" [status]="'primary'" nbButton>Add New</button>
+        </div>
+    </nb-card-header>
+
+    <nb-card-body>            
+        <div class="pb-2">
+            <nb-select placeholder="10" [size]="'small'" [(ngModel)]="defaultRowPerPage">
+                <nb-option (click)="setPager()" value="10">10</nb-option>
+                <nb-option (click)="setPager()" value="20">20</nb-option>
+                <nb-option (click)="setPager()" value="50">50</nb-option>
+                <nb-option (click)="setPager()" value="100">100</nb-option>
+            </nb-select>
+            <input #search class="col-md-3 col-sm-2 search float-right" nbInput fullWidth fieldSize="small" type="text" placeholder="Search..."
+                (keyup)="onSearch(search.value)">
+        </div>
+        <ng2-smart-table class="table-responsive" [settings]="settings" [source]="source" (custom)="onCustomAction($event)">
+        </ng2-smart-table>
+        <div *ngIf="totalRows" class="text-center">
+            <label>Number of rows: {{totalRows}}</label>
+        </div>
+    </nb-card-body>
+</nb-card>

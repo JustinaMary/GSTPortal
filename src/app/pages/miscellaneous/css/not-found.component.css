@@ -1,0 +1,23 @@
+.flex-centered {
+  margin: auto;
+}
+
+nb-card-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.title {
+  text-align: center;
+}
+
+.sub-title {
+  text-align: center;
+  display: block;
+  margin-bottom: 3rem;
+}
+
+.home-button {
+  margin-bottom: 2rem;
+}

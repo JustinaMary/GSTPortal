@@ -1,0 +1,165 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-header>
+        {{title}}
+        <div class="buttons-row float-right">
+          <button type="button" *ngIf="fromprofilepage==0" class="appearance-filled" (click)="onList()" [size]="'small'" [status]="'primary'"
+            nbButton>List</button>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="customeruserForm" class="form-valide">
+          <input type="hidden" formControlName="CustUserId">
+          <input type="hidden" formControlName="UserId">
+          <input type="hidden" formControlName="IsResetPassword">
+          <input type="hidden" formControlName="CustCode">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="Name" class="label">Name</label>
+                <input type="text" maxlength="100" trim="blur" nbInput fullWidth formControlName="Name"
+                  fieldSize="small" [status]="(submitted && f.Name.errors) ?'danger' : 'basic'">
+                <ng-container *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.Name.errors.required">Name is required</p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="ContactNo" class="label">Contact No</label>
+                <input type="text" minlength="10" trim="blur" maxlength="10" nbInput fullWidth
+                  formControlName="ContactNo" fieldSize="small"
+                  [status]="(submitted && f.ContactNo.errors) ?'danger' : 'basic'">
+                <ng-container *ngIf="submitted && f.ContactNo.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.ContactNo.errors.required">Contact No is required</p>
+                  <p class="caption status-danger" *ngIf="f.ContactNo.errors.minlength && !f.ContactNo.errors.pattern">
+                    Contact No should contain 10 digits</p>
+                  <p class="caption status-danger" *ngIf="f.ContactNo.errors.pattern">Please enter only digits</p>
+                  <p class="caption status-danger" *ngIf="f.ContactNo.errors.ContactNoExist">Contact No. already registered</p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3" *ngIf="roleNameText != 'Customer Admin'">
+              <div class="form-group">
+                <label for="Role" class="label">Role</label>
+                <nb-select placeholder="Select" [size]="'small'"
+                  [status]="(submitted && f.Role.errors) ?'danger' : 'basic'" fullWidth formControlName="Role"
+                  [(ngModel)]="optionRoleVal" (selectedChange)="onRoleChange()">
+                  <nb-option value="0" class="addNewOption">Add New</nb-option>
+                  <nb-option *ngFor="let item of roleArr" [value]="item.name">
+                    {{item.name}}
+                  </nb-option>
+                </nb-select>
+                <ng-container *ngIf="submitted && f.Role.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.Role.errors.required">Role is required</p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3" *ngIf="roleNameText == 'Customer Admin'">
+              <div class="form-group">
+                <label for="Role" class="label">Role</label>
+                <input type="text" [readonly]="true" trim="blur" nbInput fullWidth formControlName="Role" [value]="roleNameText"
+                  fieldSize="small" [status]="'basic'">
+              </div>
+            </div>
+            <div class="col-sm-3" *ngIf="optionRoleVal == '0'">
+              <div class="form-group">
+                <label for="RoleName" class="label">New Role</label>
+                <input type="text" maxlength="100" trim="blur" nbInput fullWidth formControlName="RoleName"
+                  fieldSize="small"
+                  [status]="(submitted && optionRoleVal == '0' && f.RoleName.errors) ?'danger' : 'basic'">
+                <ng-container *ngIf="submitted && optionRoleVal == '0' && f.RoleName.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.RoleName.errors.required">New Role is required</p>
+                </ng-container>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="Email" class="label">Email</label>
+                <input type="text" maxlength="200" trim="blur" nbInput fullWidth formControlName="Email"
+                  fieldSize="small" [status]="(submitted && CustUserId == 0 && f.Email.errors) ?'danger' : 'basic'">
+                <ng-container *ngIf="submitted && CustUserId == 0 && f.Email.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.Email.errors.required">Email is required</p>
+                  <p class="caption status-danger" *ngIf="f.Email.errors.pattern">Please provide a valid Email</p>
+                  <p class="caption status-danger" *ngIf="f.Email.errors.EmailUnique">Email already exists</p>
+                  <p class="caption status-danger" *ngIf="f.Email.errors.serverError">{{f.Email.errors.serverError}}</p>
+
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="UserName" class="label">User Name</label>
+                <nb-form-field>
+                  <span nbPrefix *ngIf="CustUserId == 0">{{custCode}}</span>
+                  <input type="text" [readonly]="isCodeDisabled" trim="blur" nbInput fullWidth
+                    formControlName="UserName" fieldSize="small"
+                    [status]="(submitted && f.UserName.errors) ?'danger' : 'basic'">
+                </nb-form-field>
+                <ng-container *ngIf="submitted && f.UserName.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.UserName.errors.required">User Name is required</p>
+                  <p class="caption status-danger" *ngIf="f.UserName.errors.pattern">Please provide a valid User Name
+                  </p>
+                  <p class="caption status-danger" *ngIf="f.UserName.errors.UserNmUnique">User Name already exists</p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3" *ngIf="CustUserId == 0">
+              <div class="form-group">
+                <label for="Password" class="label">Password</label>&nbsp;
+                <nb-icon icon="alert-circle-outline" [nbPopover]="passwordHint"
+                  [options]="{ animation: { type: 'zoom' } }" style="font-size:1rem;" status="primary"></nb-icon>
+                <ng-template #passwordHint>
+                  <div class="m-2 text-wrap text-center">
+                    <span><b>Password</b> must be eight characters long</span><br>
+                    <span>and contain at least one lowercase letter,</span><br>
+                    <span>one uppercase letter, one number,</span><br>
+                    <span>and one special character.</span>
+                  </div>
+                </ng-template>
+                <input type="text" trim="blur" minlength="8" maxlength="20" nbInput fullWidth formControlName="Password"
+                  fieldSize="small" [status]="(submitted && CustUserId == 0 && f.Password.errors) ?'danger' : 'basic'">
+                <ng-container *ngIf="submitted && CustUserId == 0 && f.Password.errors" class="invalid-feedback">
+                  <p class="caption status-danger" *ngIf="f.Password.errors.required">Password is required</p>
+                  <p class="caption status-danger" *ngIf="f.Password.errors.pattern">Please provide a valid Password</p>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-sm-3" *ngIf="roleNameText != 'Customer Admin'">
+              <div class="form-group">
+                <label for="CustStId" class="label">Customer States</label>
+                <nb-select multiple [(ngModel)]="statesSelected" [size]="'small'" fullWidth placeholder="Select"
+                  formControlName="CustStId" (selectedChange)="selectedStates($event)">
+                  <!-- <nb-option value="0">Select All</nb-option> -->
+                  <nb-option *ngFor="let state of stategstArr" [value]="state.custStId">
+                    {{ state.stateName }}</nb-option>
+                </nb-select>
+              </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                  <label class="label">Selected States</label> <br />
+                  <span *ngFor="let state of stateNameArray; let isLast=last" class="stateslabel">
+                    {{state}}{{isLast ? '' : ', '}}
+                  </span>
+                </div>
+              </div>
+          </div>
+
+
+          <div class="buttons-row float-right">
+            <button type="button" (click)="onSubmit()" class="appearance-filled"
+              [size]="'small'" [status]="'success'" nbButton [class.disabledBtn]="loading">
+              <nb-icon nbPrefix class="fa fa-spinner fa-spin" pack="font-awesome"></nb-icon>Save</button>
+            <button type="button" [disabled]="isDisabled" (click)="onReset()" class="appearance-outline"
+              [size]="'small'" [status]="'info'" nbButton>Reset</button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

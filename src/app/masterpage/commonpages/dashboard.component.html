@@ -1,0 +1,67 @@
+<div class="row py-3" *ngIf="totalCount > 0">
+  <div class="col-md-4">
+    <nb-card size="tiny" class="solar-card">
+      <nb-card-header>New Request</nb-card-header>
+      <nb-card-body class="py-0">
+        <div class="row">
+          <div class="col-md-4">
+            <circle-progress [percent]="pendingPercent" [radius]="65" [outerStrokeWidth]="7" [innerStrokeWidth]="3"
+              [outerStrokeColor]="'#ffbb00'" [innerStrokeColor]="'#ffda75'" [animation]="true"
+              [animationDuration]="300" [showSubtitle]="false"></circle-progress>
+          </div>
+          <div class="info col-md-8 py-5">
+            <div class="h4 value">{{pendingCount}}</div>
+            <div class="details subtitle-2"><span>out of </span>{{totalCount}}</div>
+          </div>
+        </div>
+
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-md-4">
+    <nb-card size="tiny" class="solar-card">
+      <nb-card-header>In-Progress Request</nb-card-header>
+      <nb-card-body class="py-0">
+          <div class="row">
+            <div class="col-md-4">
+              <circle-progress [percent]="inProgressPercent" [radius]="65" [outerStrokeWidth]="7" [innerStrokeWidth]="3"
+                [outerStrokeColor]="'#178de8'" [innerStrokeColor]="'#7ec5fb'" [animation]="true"
+                [animationDuration]="300" [showSubtitle]="false"></circle-progress>
+            </div>
+            <div class="info col-md-8 py-5">
+              <div class="h4 value">{{inProgressCount}}</div>
+              <div class="details subtitle-2"><span>out of </span>{{totalCount}}</div>
+            </div>
+          </div>
+        </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-md-4">
+    <nb-card size="tiny" class="solar-card">
+      <nb-card-header>Closed Request</nb-card-header>
+      <nb-card-body class="py-0">
+          <div class="row">
+            <div class="col-md-4">
+              <circle-progress [percent]="closedPercent" [radius]="65" [outerStrokeWidth]="7" [innerStrokeWidth]="3"
+                [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true"
+                [animationDuration]="300" [showSubtitle]="false"></circle-progress>
+            </div>
+            <div class="info col-md-8 py-5">
+              <div class="h4 value">{{closedCount}}</div>
+              <div class="details subtitle-2"><span>out of </span>{{totalCount}}</div>
+            </div>
+          </div>
+        </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header>{{titleLable}} (Current Year)</nb-card-header>
+      <nb-card-body>
+        <ngx-chartjs-bar2></ngx-chartjs-bar2>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

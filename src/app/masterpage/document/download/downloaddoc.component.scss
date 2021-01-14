@@ -1,0 +1,38 @@
+:host /deep/ ng2-st-tbody-edit-delete {
+    display: flex !important;
+    height: 0 !important;
+  }
+
+  :host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    font-size: 1.5rem !important;
+    padding: 0.875rem 1.25rem !important;
+  }
+
+  :host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom:hover {
+    color: #5dcfe3;
+  }
+
+  :host /deep/ .ng2-smart-action-multiple-select {
+    text-align: center;
+    }
+    
+    :host /deep/ .ng2-smart-action-multiple-select > input {
+    width:13px;
+    height:13px;
+    display: unset;
+    }
+
+    :host /deep/ td.ng2-smart-actions.ng2-smart-action-multiple-select {
+      padding: 0.875rem 1.25rem !important;
+    }
+
+    :host /deep/ .table td[colspan] {
+      border: none;
+    }
+
+    :host /deep/ .doi {
+      white-space: nowrap;
+    }
